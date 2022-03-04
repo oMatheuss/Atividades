@@ -114,7 +114,7 @@ void compare(LISTA * list, LISTA * list2) {
 			getch();
 			return;
 		}
-		if (list == NULL || list2 == NULL) {
+		if (list == NULL || list2 == NULL && !(list == NULL && list2 == NULL))) {
 			printf("As listas são diferentes!");
 			getch();
 			return;""
