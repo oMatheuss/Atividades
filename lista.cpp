@@ -110,26 +110,27 @@ LISTA * remove_num (LISTA * list) {
 void compare(LISTA * list, LISTA * list2) {
 	while(true) {
 		if (list == NULL && list2 == NULL) {
-			printf("As listas são iguais!");
+			printf("As listas sao iguais!");
 			getch();
 			return;
 		}
-		if (list == NULL || list2 == NULL && !(list == NULL && list2 == NULL))) {
-			printf("As listas são diferentes!");
+		if (list == NULL || list2 == NULL && !(list == NULL && list2 == NULL)) {
+			printf("As listas sao diferentes!");
 			getch();
-			return;""
+			return;
 		}
 		if (list->num != list2->num) {
-			printf("As listas são diferentes!");
+			printf("As listas sao diferentes!");
 			getch();
 			return;
 		}
 		list = list->next;
 		list2 = list2->next;
 	}
+
 }
 
-void lenght(LISTA * list) {
+void size(LISTA * list) {
 	int count = 0;
 	if (list == NULL) {
 		printf("A lista esta vazia!");
@@ -144,6 +145,34 @@ void lenght(LISTA * list) {
 	}
 	printf("A lista tem %d elementos!", count);
 	getch();
+}
+
+int lenght(LISTA * list) {
+	int count = 0;
+	if (list == NULL) {
+		return 0;
+	}
+	while (true) {
+		if (list != NULL)
+			count++;
+		if (list->next == NULL) break;
+		list = list->next;
+	}
+	return count;
+}
+
+int* toVector(LISTA * list) {
+	int size = lenght(list), i = 0;
+	int vec[size];
+	for(i; i < size; i++) {
+		vec[i] = list->num;
+		list = list->next;
+	}
+	return vec;
+}
+
+void printVector() {
+	
 }
 
 int main () {
@@ -172,6 +201,10 @@ int main () {
 		printf("\n");
 		
 		printf("11 -> comparar listas\n");
+		
+		printf("\n Listas para vetor: ");
+		int* vet = toVector(list);
+		int* vet2 = toVector(list2);
 		scanf("%d", &op);
 		switch (op) {
 			case 1:
@@ -187,7 +220,7 @@ int main () {
 				find_number(list);
 				break;
 			case 5:
-				lenght(list);
+				size(list);
 				break;
 			case 6:
 				list2 = insert_start(list2);
@@ -202,7 +235,7 @@ int main () {
 				find_number(list2);
 				break;
 			case 10:
-				lenght(list2);
+				size(list2);
 				break;
 			case 11:
 				compare(list, list2);
