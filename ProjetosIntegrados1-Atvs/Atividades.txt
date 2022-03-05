@@ -1,0 +1,188 @@
+/* Aluno: Matheus Silva Moura, RA: 5152442
+ * Atividade 01 - Projetos Integrados - 02/04/22
+ */
+
+using System;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Informe uma quantidade de segundos: ");
+            int seg = Int32.Parse(Console.ReadLine());
+
+            int hrs = (int)(seg / 3600);
+            seg -= hrs * 3600;
+            int min = (int)(seg / 60);
+            seg -= min * 60;
+
+            Console.WriteLine($"Conversão para hh:mm:ss = {hrs:D2}:{min:D2}:{seg:D2}");
+        }
+    }
+}
+
+
+/* Aluno: Matheus Silva Moura, RA: 5152442
+ * Atividade 02 - Projetos Integrados - 02/04/22
+ */
+
+using System;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Informe N: ");
+            int n = Int32.Parse(Console.ReadLine());
+
+            if (!(n%2 == 0)) { n--; }
+            for (int i = n; i >= 0; i -= 2)
+            {
+                Console.Write($"{i} ");
+            }
+        }
+    }
+}
+
+/* Aluno: Matheus Silva Moura, RA: 5152442
+ * Atividade 03 - Projetos Integrados - 02/04/22
+ */
+
+using System;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Informe três números para os três lados de um triangulo: ");
+            double a = Int32.Parse(Console.ReadLine());
+            double b = Int32.Parse(Console.ReadLine());
+            double c = Int32.Parse(Console.ReadLine());
+            double maior = a;
+            double catA = b, catB = c;
+            if (maior < b) { maior = b; catA = a; catB = c; };
+            if (maior < c) { maior = c; catA = a; catB = b; };
+
+            if (maior > Math.Abs(catA - catB) && maior < (catA + catB))
+            {
+                Console.WriteLine("Os números são os lados de um triangulo!");
+            } else
+            {
+                Console.WriteLine("Os números não são os lados de um triangulo!");
+            }
+            
+        }
+    }
+}
+
+/* Aluno: Matheus Silva Moura, RA: 5152442
+ * Atividade 04 - Projetos Integrados - 02/04/22
+ */
+
+using System;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Fatorial de N. Informe N: ");
+            int n = Int32.Parse(Console.ReadLine());
+
+            if (n == 0) { Console.WriteLine($"Fatorial de {n:D} = 1"); }
+            else if (n > 0)
+            {
+                int r = 1;
+                for (int i = n; i > 0; i--) { r *= i; }
+                Console.WriteLine($"Fatorial de {n:D} = {r:D}");
+            }
+            else { Console.WriteLine("Numero fora do limite!"); }
+        }
+    }
+}
+
+/* Aluno: Matheus Silva Moura, RA: 5152442
+ * Atividade 05 - Projetos Integrados - 02/04/22
+ */
+
+using System;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        public static long Fib(int n)
+        {
+            if (n == 0) return 0;
+            else if (n == 1) return 1;
+            else return Fib(n - 1) + Fib(n - 2);
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Fibonacci na posição N. Informe N: ");
+            int n = Int32.Parse(Console.ReadLine());
+            Console.WriteLine($"Fib({n:D}) = {Fib(n)}");
+        }
+    }
+}
+
+/* Aluno: Matheus Silva Moura, RA: 5152442
+ * Atividade 06 - Projetos Integrados - 02/04/22
+ */
+
+using System;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Exponenciação. Informe a base: ");
+            int b = Int32.Parse(Console.ReadLine());
+            int c = b;
+            Console.WriteLine("Exponenciação. Informe o expoente: ");
+            int e = Int32.Parse(Console.ReadLine());
+            int i = 0;
+            do
+            {
+                b *= c;
+                i++;
+            } while (i < e-1);
+
+            Console.WriteLine($"{c}^{e} = {b}");
+        }
+    }
+}
+
+/* Aluno: Matheus Silva Moura, RA: 5152442
+ * Atividade 07 - Projetos Integrados - 02/04/22
+ */
+
+using System;
+
+namespace ConsoleApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int count = 0;
+            Console.WriteLine("Contando numeros informados até ser informado 10. Informe um numero: ");
+            int n = 0;
+            do {
+                n = Int32.Parse(Console.ReadLine());
+                count++;
+            } while (n != 10) ;
+            Console.WriteLine($"Voçe inseriu {count} numero(s)!");
+        }
+    }
+}
