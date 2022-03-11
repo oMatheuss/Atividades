@@ -2,13 +2,14 @@
 #include <conio.h>
 #include <iostream>
 
+//Ex 01
 struct LISTA {
 	int num;
 	LISTA *next;
 };
 
-LISTA *
-insert_start (LISTA * list) {
+//Ex 01
+LISTA * insert_start (LISTA * list) {
 	LISTA *newList = new LISTA ();
 	printf ("Informe o numero a ser adicionado:");
 	 scanf ("%d", &newList->num);
@@ -21,8 +22,8 @@ insert_start (LISTA * list) {
 	return newList;
 }
 
-void
-printLISTA (LISTA * list) {
+//Ex 02
+void printLISTA (LISTA * list) {
 	printf ("[");
 	if (list != NULL) {
 		printf ("%d", list->num);
@@ -35,6 +36,7 @@ printLISTA (LISTA * list) {
     printf ("]\n");
 }
 
+//Ex 02
 void find_number(LISTA * list) {
 	int n;
 	printf("informe o numero que deseja procurar: ");
@@ -63,8 +65,8 @@ int find_number_bool(LISTA * list, int n) {
 	return 0;
 }
 
-LISTA *
-insert_end (LISTA * list) {
+//Ex 02
+LISTA * insert_end (LISTA * list) {
 	LISTA * newList = new LISTA;
 	LISTA * aux = list;
 	printf ("Informe o numero a ser adicionado:");
@@ -77,6 +79,7 @@ insert_end (LISTA * list) {
 	return list;
 }
 
+//Ex 02
 LISTA * remove_num (LISTA * list) {
 	if (list == NULL) {
 		printf("lista vazia");
@@ -97,53 +100,7 @@ LISTA * remove_num (LISTA * list) {
 	return list;
 }
 
-LISTA * replace(LISTA * list) {
-	LISTA * aux = list;
-	if (list == NULL) {
-		printf("lista vazia");
-		return list;
-	}
-	int num;
-	printf("Informe o numero que deseja substituir: ");
-	scanf("%d", &num);
-	while (aux != NULL) {
-		if (aux->num == num) {
-			printf("Informe o novo numero: ");
-			int newNum;
-			scanf("%d", &newNum);
-			aux->num = newNum;
-			return list;
-		}
-		aux = aux->next;
-	}
-	printf("o numero nao esta na lista");
-	getch();
-	return list;
-}
-
-void compare(LISTA * list, LISTA * list2) {
-	while(true) {
-		if (list == NULL && list2 == NULL) {
-			printf("As listas sao iguais!");
-			getch();
-			return;
-		}
-		if ((list == NULL || list2 == NULL) && !(list == NULL && list2 == NULL)) {
-			printf("As listas sao diferentes!");
-			getch();
-			return;
-		}
-		if (list->num != list2->num) {
-			printf("As listas sao diferentes!");
-			getch();
-			return;
-		}
-		list = list->next;
-		list2 = list2->next;
-	}
-
-}
-
+//Ex 03
 void size(LISTA * list) {
 	int count = 0;
 	if (list == NULL) {
@@ -175,6 +132,45 @@ int length(LISTA * list) {
 	return count;
 }
 
+//Ex 04
+LISTA * replace(LISTA * list) {
+	LISTA * aux = list;
+	if (list == NULL) {
+		printf("lista vazia");
+		return list;
+	}
+	int num;
+	printf("Informe o numero que deseja substituir: ");
+	scanf("%d", &num);
+	while (aux != NULL) {
+		if (aux->num == num) {
+			printf("Informe o novo numero: ");
+			int newNum;
+			scanf("%d", &newNum);
+			aux->num = newNum;
+			return list;
+		}
+		aux = aux->next;
+	}
+	printf("o numero nao esta na lista");
+	getch();
+	return list;
+}
+//Ex 05
+LISTA * fromVector(int* vec, int len) {
+	LISTA * list = new LISTA();
+	LISTA * aux = list;
+	int i;
+	for (i = 0; i < len; i++) {
+		aux->num = vec[i];
+		aux->next = new LISTA();
+		aux  = aux->next;
+	}
+	aux = NULL;
+	return list;
+}
+
+//Ex 06
 int* toVector(LISTA * list) {
 	int size = length(list), i;
 	int* vec = new int[size];
@@ -188,20 +184,34 @@ int* toVector(LISTA * list) {
 void printVector(int* vec, int len) {
 	printf("[");
 	int i;
-	for (i = 0; i < (len - 1); i++) {
+	for (i = 0; i < len-1; i++) {
 		printf("%d, ", vec[i]);
 	}
 	printf("%d]", vec[++i]);
 	getch();
 }
 
-LISTA * concatena(LISTA * list, LISTA * list2) {
-	LISTA * aux = list;
-	while(aux->next != NULL) {
-		aux = aux->next;
+//Ex 07
+void compare(LISTA * list, LISTA * list2) {
+	while(true) {
+		if (list == NULL && list2 == NULL) {
+			printf("As listas sao iguais!");
+			getch();
+			return;
+		}
+		if ((list == NULL || list2 == NULL) && !(list == NULL && list2 == NULL)) {
+			printf("As listas sao diferentes!");
+			getch();
+			return;
+		}
+		if (list->num != list2->num) {
+			printf("As listas sao diferentes!");
+			getch();
+			return;
+		}
+		list = list->next;
+		list2 = list2->next;
 	}
-	aux->next = list2;
-	return list;
 }
 
 LISTA * copia(LISTA * list) {
@@ -221,6 +231,7 @@ LISTA * copia(LISTA * list) {
 	return newList;
 }
 
+//Ex 08
 LISTA * separa(LISTA * list, int n) {
 	if (list == NULL) return NULL;
 	while(list->num != n) {
@@ -231,6 +242,17 @@ LISTA * separa(LISTA * list, int n) {
 	return copia(list);
 }
 
+//Ex 09
+LISTA * concatena(LISTA * list, LISTA * list2) {
+	LISTA * aux = list;
+	while(aux->next != NULL) {
+		aux = aux->next;
+	}
+	aux->next = list2;
+	return list;
+}
+
+//Ex 10
 LISTA * remove_prefixo(LISTA * list, int n) {
 	if (n > length(list)) return NULL;
 	int i;
@@ -244,6 +266,7 @@ int main () {
 	
 	int op = 0;
 	while (op != 99) {
+		printf("Matheus Silva Moura - 5152442\n");
 		printLISTA(list);
 		printLISTA(list2);
 		printf("selecione uma opcao\n");
@@ -266,7 +289,13 @@ int main () {
 		printf("11 -> comparar listas\n");
 		printf("12 -> concatena lista 2 na 1\n");
 		printf("13 -> separar lista da lista 1 nas 2\n");
+		printf("14 -> remover numero prefixo da lista 1\n");
 		printf("15 -> lista 1 para vetor\n");
+		printf("16 -> de vetor para a lista 1\n");
+		
+		
+		int i, n, tam;
+		int* vec;
 		
 		scanf("%d", &op);
 		switch (op) {
@@ -309,25 +338,35 @@ int main () {
 				break;
 			case 13:
 				printf("Informe a onde deseja separar:");
-				int n;
 				scanf("%d", &n);
 				list2 = separa(list, n);
 				break;
 			case 14:
 				printf("Informe o numero de numeros que deseja remover: ");
-				int n1;
-				scanf("%d", &n1);
-				list = remove_prefixo(list, n1);
+				int n;
+				scanf("%d", &n);
+				list = remove_prefixo(list, n);
 				break;
 			case 15:
-				int* vec;
 				vec = toVector(list);
 				printVector(vec, length(list));
+				break;
+			case 16:
+				printf("informe a quantidade de elemntos para o vetor 1: ");
+				scanf("%d", &tam);
+				if (tam <= 0) break;
+				vec = new int[tam];
+				printf("Informe os elementos: ");
+				for (i = 0; i < tam; i++) { scanf("%d", &vec[i]); }
+				
+				// do vetor para lista:
+				list = fromVector(vec, tam);
 				break;
 			default:
 				break;
 		}
 		system("cls");
+		//fim while
 	}
 	return 0;
 }
