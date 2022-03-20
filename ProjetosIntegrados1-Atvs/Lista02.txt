@@ -1,0 +1,254 @@
+
+//Matheus Silva Moura - 5152442 - Lista 02
+
+//Classe Celular
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lista02
+{
+    class Celular
+    {
+        private string fabricante;
+        private string modelo;
+        private int quantidade;
+        private double valor;
+
+        public string Fabricante { get => fabricante; set => fabricante = value; }
+        public string Modelo { get => modelo; set => modelo = value; }
+        public int Quantidade { get => quantidade; set => quantidade = value > 0 ? value : 0; }
+        public double Valor { get => valor; set => valor = value > 0 ? value : 0.01; }
+
+        public Celular(string fabricante, string modelo, int quantidade, double valor)
+        {
+            Fabricante = fabricante;
+            Modelo = modelo;
+            Quantidade = quantidade;
+            Valor = valor;
+        }
+    }
+}
+
+//Classe EstoqueCelular
+
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Lista02
+{
+    class EstoqueCelular
+    {
+        private List<Celular> estoque;
+
+        public EstoqueCelular()
+        {
+            estoque = new List<Celular>();
+        }
+
+        public void novoCelular(Celular c)
+        {
+            estoque.Add(c);
+        }
+
+        public void cadastrarCelular(string fabricante, string modelo, int quantidade, double valor)
+        {
+            estoque.Add(new Celular(fabricante, modelo, quantidade, valor));
+        }
+
+        public Boolean adicionarCelular(string modelo, int quantidade)
+        {
+            foreach (Celular c in estoque)
+            {
+                if (c.Modelo.Equals(modelo))
+                {
+                    c.Quantidade += quantidade;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int quantidadeEmEstoque(string modelo)
+        {
+            foreach(Celular c in estoque)
+            {
+                if (c.Modelo.Equals(modelo))
+                {
+                    return c.Quantidade;
+                }
+            }
+            return -1;
+        }
+
+        public double valorCelular(string modelo)
+        {
+            foreach (Celular c in estoque)
+            {
+                if (c.Modelo.Equals(modelo))
+                {
+                    return c.Valor;
+                }
+            }
+            return -1;
+        }
+
+        public Boolean excluirModelo(string modelo)
+        {
+            foreach(Celular c in estoque)
+            {
+                if (c.Modelo.Equals(modelo))
+                {
+                    estoque.Remove(c);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Boolean alterarValorModelo(string modelo, double valor)
+        {
+            foreach (Celular c in estoque)
+            {
+                if (c.Modelo.Equals(modelo))
+                {
+                    c.Valor = valor;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public Boolean decrementarQuantidadeModelo(string modelo, int quantidade)
+        {
+            foreach (Celular c in estoque)
+            {
+                if (c.Modelo.Equals(modelo))
+                {
+                    c.Quantidade -= quantidade;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        override
+        public String ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (Celular c in estoque)
+            {
+                sb.AppendLine($"Fabricante: {c.Fabricante}, Modelo: {c.Modelo}, Quantidade: {c.Quantidade}, Valor: {c.Valor};\n");
+            }
+            return sb.ToString();
+        }
+    }
+}
+
+//Classe Program
+
+using System;
+
+namespace Lista02
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            EstoqueCelular estoque = new EstoqueCelular();
+
+            //menu
+            int opc = 1;
+            string e;
+            while (opc != 0)
+            {
+                Console.WriteLine("informe a opção desejada:\n");
+                Console.WriteLine("1 -> Cadastrar Celular");
+                Console.WriteLine("2 -> Adicionar Estoque do Celular");
+                Console.WriteLine("3 -> Buscar Quantidade do Modelo");
+                Console.WriteLine("4 -> Buscar Valor do Modelo");
+                Console.WriteLine("5 -> Excluir Celular");
+                Console.WriteLine("6 -> Alterar Valor do Modelo");
+                Console.WriteLine("7 -> Decrementar Estoque do Celular");
+                Console.WriteLine("8 -> Relatório Geral");
+
+                e = Console.ReadLine();
+                opc = Int32.Parse(e);
+
+                string fabricante, modelo;
+                int quantidade;
+                double valor;
+
+                switch (opc)
+                {
+                    case 0:
+                        return;
+                    case 1:
+                        Console.WriteLine("Informe o Fabricante: ");
+                        fabricante = Console.ReadLine();
+                        Console.WriteLine("Informe o Modelo: ");
+                        modelo = Console.ReadLine();
+                        estoque.cadastrarCelular(fabricante, modelo, 0, 0);
+                        break;
+                    case 2:
+                        Console.WriteLine("Informe o Modelo: ");
+                        modelo = Console.ReadLine();
+                        Console.WriteLine("Informe a Quantidade a incrementar: ");
+                        quantidade = Int32.Parse(Console.ReadLine());
+                        if(estoque.adicionarCelular(modelo, quantidade)) Console.WriteLine("Quntidade adicionada com sucesso!");
+                        else Console.WriteLine("Modelo não encontrado!");
+                        break;
+                    case 3:
+                        Console.WriteLine("Informe o Modelo: ");
+                        modelo = Console.ReadLine();
+                        quantidade = estoque.quantidadeEmEstoque(modelo);
+                        Console.WriteLine(quantidade != -1 ? $"A quantidade do modelo é: {quantidade}" : "modelo não encontrado!");
+                        break;
+                    case 4:
+                        Console.WriteLine("Informe o Modelo: ");
+                        modelo = Console.ReadLine();
+                        valor = estoque.valorCelular(modelo);
+                        Console.WriteLine($"O valor do modelo é: {valor:.2F}");
+                        break;
+                    case 5:
+                        Console.WriteLine("Informe o Modelo: ");
+                        modelo = Console.ReadLine();
+                        if (estoque.excluirModelo(modelo)) Console.WriteLine("Modelo excluido com sucesso!");
+                        else Console.WriteLine("Modelo não encontrado");
+                        break;
+                    case 6:
+                        Console.WriteLine("Informe o Modelo: ");
+                        modelo = Console.ReadLine();
+                        Console.WriteLine("Informe o novo valor do modelo: ");
+                        valor = Double.Parse(Console.ReadLine());
+                        if (estoque.alterarValorModelo(modelo, valor)) Console.WriteLine("Valor alterado com sucesso!");
+                        else Console.WriteLine("Modelo não encontrado");
+                        break;
+                    case 7:
+                        Console.WriteLine("Informe o Modelo: ");
+                        modelo = Console.ReadLine();
+                        Console.WriteLine("Informe a Quantidade a decrementar: ");
+                        quantidade = Int32.Parse(Console.ReadLine());
+                        estoque.decrementarQuantidadeModelo(modelo, quantidade);
+                        break;
+                    case 8:
+                        Console.WriteLine(estoque.ToString());
+                        break;
+                    default:
+                        Console.WriteLine("Opção Invalida!\n");
+                        break;
+                }
+                Console.WriteLine("[Enter] para continuar!");
+                Console.ReadLine();
+                Console.Clear();
+            }
+        }
+    }
+}
