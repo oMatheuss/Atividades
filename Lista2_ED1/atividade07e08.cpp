@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <windows.h>
+#include <conio.h>
 
 /*
-Escreva um programa que implemente uma lista circular que armazena números
-reais. Implemente as operações de inserir no início, inserir no fim, remoção e
-consulta (impressão) dos valores da lista.
+Escreva um programa que implemente uma lista circular que armazena numeros
+reais. Implemente as operacoes de inserir no inicio, inserir no fim, remover e
+consulta (impressao) dos valores da lista.
 */
 
 struct Lista {
@@ -80,24 +81,42 @@ void imprime_lista(Lista * lista) {
 	printf("%.3f]\n", aux->num);
 }
 
+/*
+8 - Escreva uma funÃ§Ã£o que verifique se duas listas circulares sÃ£o iguais, ou melhor,
+se tÃªm o mesmo conteÃºdo.
+*/
 void comparar_listas(Lista * lista, Lista * lista2) {
 	Lista * aux = lista;
-	Lista * aux2 = lista;
-	while (aux != lista && aux2 != lista2) {
-		if (aux->num != aux2->num) {
-			printf("Listas sao diferentes!");
-			return;
-		}
-		aux = aux->prx;
-		aux2 = aux2->prx;
+	Lista * aux2 = lista2;
+
+	if (lista == NULL || lista2 == NULL) {
+		printf("1Listas diferentes!\n");
+		return;
+	} else {
+		do {
+			if ((!(aux == lista) && aux2 == lista2) || (aux == lista && !(aux2 == lista2))) {
+				printf("Listas diferentes!\n");
+				return;
+			}
+			if (aux->num != aux2->num) {
+				printf("Listas diferentes!\n");
+				return;
+			}
+			aux = aux->prx;
+			aux2 = aux2->prx;
+		} while (aux != lista && aux2 != lista2);
 	}
-	if (aux->prx == lista && aux2->prx == lista2) {
-		printf("Listas sao diferentes!");
+	if ((!(aux == lista) && aux2 == lista2) || (aux == lista && !(aux2 == lista2))) {
+		printf("Listas diferentes!\n");
+	} else {
+		printf("Listas iguais!\n");
 	}
 }
 
 int main() {
 	Lista * lista = NULL;
+
+	//Lista usada para teste de comparaÃ§Ã£o
 	Lista * lista2 = NULL;
 	lista2 = insere_fim(lista2, 10.0f);
 	lista2 = insere_fim(lista2, 20.0f);
@@ -113,6 +132,7 @@ int main() {
 		printf("\nInserir no inicio da lista -> 1\n");
 		printf("Inserir no fim da lista -> 2\n");
 		printf("Remover da lista -> 3\n");
+		printf("Comparar listas -> 4\n");
 		
 		printf("\nInforme a opcao: \n");
 		
@@ -133,6 +153,10 @@ int main() {
 				printf("Informe um numero a ser removido: ");
 				scanf("%f", &num);
 				lista = remover(lista, num);
+				break;
+			case 4:
+				comparar_listas(lista, lista2);
+				getch();
 				break;
 			default:
 				return 0;
