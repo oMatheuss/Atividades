@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Conversão de Temperaturas</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-dark bg-dark">
+            <div id="title" >Fisica 3</div>
+        </nav>
+
+        <div class="container">
+            
+
+            <div class="jumbotron">
+                <h1 class="display-6">Conversão de Temperaturas</h1>
+                <p class="lead">Calculos</p>
+                <hr class="my-4">
+            </div>
+                
+            <div class="row">
+                <div class="col-lg-3 col-xl-3 col-md-12 col-sm-12">
+                    <img class="img-fluid" src="images/img.png">
+                </div>
+
+                <div class="col-lg-3 col-xl-3 col-md-4 col-sm-12">
+                    <label for="tempgelh">Altura da coluna na Temp. Gelo</label>
+                    <div class="input-group mb-3">
+                        
+                        <input type="number" class="form-control" id="tempgelh" placeholder="cm">
+                        
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+
+                    <label for="tempebuh">Altura da coluna na Temp. Ebulição</label>
+                    <div class="input-group mb-3">
+                        
+                        <input type="number" class="form-control" id="tempebuh" placeholder="cm">
+                        
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+
+                    <label for="tempxh">Altura X</label>
+                    <div class="input-group mb-3">
+                        
+                        <input type="number" class="form-control" id="tempxh" placeholder="cm">
+                        
+                        <div class="input-group-append">
+                            <span class="input-group-text">cm</span>
+                        </div>
+                    </div>
+
+                    <label for="tempx">Temp X</label>
+                    <div class="input-group mb-3">
+                        
+                        <input type="number" class="form-control" id="tempx" placeholder="°C">
+                        
+                        <div class="input-group-append">
+                            <span class="input-group-text">°C</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" id="calcular" >Calcular Por Altura</button>
+                    <button class="btn btn-primary" id="calcular2" >Calcular Por Temperatura</button>
+                    <hr>
+                </div>
+                
+                <div class="col-lg-5 col-xl-5 col-md-8 col-sm-12">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Temperatura em Graus Celsius
+                            <span class="list-group-item bg-primary rounded">Temp = <span id="temp"><sup>o</sup>C</span></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Altura em centimetros
+                            <span class="list-group-item bg-primary rounded">Altura = <span id="alt"> cm</span></span>
+                        </li>
+                    </ul>
+                </div>
+
+            
+            </div>
+        </div>
+        <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
+    </body>
+</html>
